@@ -1,0 +1,365 @@
+\documentclass[11pt,reqno]{amsart}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym,amscd}
+\usepackage{amsmath,amssymb,amsthm,url,mathrsfs}
+\usepackage{enumerate,stmaryrd,scalefnt}
+% \usepackage{tikz}
+\usepackage{color}
+% \usetikzlibrary{calc}
+
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+
+\theoremstyle{definition}
+\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\newcounter{claim}
+\newtheorem{claim}[claim]{Claim}
+\newcounter{conjecture}
+\newtheorem{conjecture}[conjecture]{Conjecture}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Prop}{Proposition}
+
+ \theoremstyle{remark}
+ \newtheorem*{remark}{Remark}
+ \newtheorem*{remarks}{Remarks}
+ \newtheorem*{notation}{Notation}
+\DeclareMathOperator{\dom}{dom}
+
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+
+\newcommand{\lb}{\ensuremath{\llbracket}}
+\newcommand{\rb}{\ensuremath{\rrbracket}}
+
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\bA}{\ensuremath{\mathbf{A}}}
+\newcommand{\rel}[1]{\ensuremath{\mathbin{#1}}}
+\newcommand{\res}{\ensuremath{\upharpoonright}}  % restriction
+
+% binary operations
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\nleq}{\ensuremath{\nleqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+%\renewcommand{\lneq}{\ensuremath{\lneqslant}}
+\renewcommand{\gneq}{\ensuremath{\gneqslant}}
+\renewcommand{\ngeq}{\ensuremath{\ngeqslant}}
+\newcommand{\ssubnormal}{\ensuremath{\vartriangleleft}}
+\newcommand{\subnormal}{\ensuremath{\trianglelefteqslant}}
+\newcommand{\supnormal}{\ensuremath{\trianglerighteqslant}}
+\newcommand{\notsubnormal}{\ensuremath{\ntrianglelefteqslant}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\join}{\ensuremath{\vee}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\renewcommand{\Join}{\ensuremath{\bigvee}}
+
+\newcommand{\Eq}{\ensuremath{\operatorname{Eq}}}
+\newcommand{\bEq}{\ensuremath{\mathbf{Eq}}}
+\newcommand{\bEqX}{\ensuremath{\mathbf{Eq(X)}}}
+\newcommand{\Cg}{\ensuremath{\operatorname{Cg}}}
+\newcommand{\Sg}{\ensuremath{\operatorname{Sg}}}
+\newcommand{\SD}{\ensuremath{\operatorname{SD}}}
+\newcommand{\Con}{\ensuremath{\operatorname{Con}}}
+\newcommand{\Sub}{\ensuremath{\operatorname{Sub}}}
+\newcommand{\Pol}{\ensuremath{\operatorname{Pol}}}
+\newcommand{\Clo}{\ensuremath{\operatorname{Clo}}}
+\newcommand{\Sym}{\ensuremath{\operatorname{Sym}}}
+\newcommand{\core}{\ensuremath{\operatorname{core}}}
+
+\newcommand{\two}{\ensuremath{\mathbf{2}}}
+\newcommand{\three}{\ensuremath{\mathbf{3}}}
+\newcommand{\circone}{\ensuremath{\circ^{1}}}
+\newcommand{\circtwo}{\ensuremath{\circ^{2}}}
+\newcommand{\circthree}{\ensuremath{\circ^{3}}}
+\newcommand{\circfour}{\ensuremath{\circ^{4}}}
+\newcommand{\circi}{\ensuremath{\circ^{i}}}
+\newcommand{\circj}{\ensuremath{\circ^{j}}}
+\newcommand{\circn}{\ensuremath{\circ^{n}}}
+\newcommand{\acb}{\ensuremath{\alpha \circn \beta}}
+\newcommand{\bca}{\ensuremath{\beta \circn \alpha}}
+% \pagestyle{fancy}
+% \lhead{{\it A lemma relating intervals in partition lattices}}  \chead{}
+%   \rhead{November 12, 2012}
+
+\begin{document}
+\title[Permuting relations and permuting subgroups]{Permuting equivalence relations\\
+AND\\
+permuting subgroups}
+\date{May 20, 2013}
+%% First author (Note: The order of the items here is important!)
+\author{William DeMeo}
+\email{williamdemeo@gmail.com}
+\urladdr{\url{http://williamdemeo.wordpress.com}}
+\address{Department of Mathematics\\
+University of South Carolina\\Columbia 29208\\USA}
+%% AMS subject classification; see http://www.ams.org/msc
+%% Only one Primary. Possibly several Secondary.
+%\subjclass[2010]{Primary: 08A30; Secondary: 08A60, 06B10.} %, 06B15.}
+
+% \begin{abstract}
+% \end{abstract}
+
+\maketitle
+% \setcounter{section}{+1}
+% \setcounter{secnumdepth}{2}
+
+\section{Permuting Equivalence Relations}
+Let $X$ be a set and let $\bEqX = \<\Eq X, \meet, \join\>$ denote the lattice of equivalence relations on
+$X$.  
+Given $\alpha, \beta \in \Eq X$, the \emph{meet} of $\alpha$ and $\beta$ is the usual intersection of subsets:
+$\alpha \meet \beta = \alpha \cap \beta$. The \emph{join} 
+of $\alpha$ and $\beta$,
+denoted $\alpha \join \beta$, is the smallest equivalence relation containing
+both $\alpha$ and $\beta$.
+
+Given $\alpha, \beta \in \Eq X$, define the \emph{composition} of $\alpha$ and
+$\beta$ to be the binary relation
+\[
+\alpha \circ \beta = \{(x,y)\in X^2 \mid (\exists z\in X) \, x \rel{\alpha} z \rel{\beta} y\}.
+\]
+Note that
+$\circ$ is associative:
+$(\alpha \circ \beta) \circ \gamma = \alpha \circ (\beta \circ \gamma)$.
+
+%Let $\alpha \circ^{(1)} \beta = \alpha$ and, for each $n\in \N$, define the
+Let $\alpha \circone \beta = \alpha$ and, for each $n\in \N$, define the
+$n$-fold composition of $\alpha$ and $\beta$ to be the binary relation
+\[
+%\alpha \circn \beta = \alpha \circ (\beta  \circ^{n-1} \alpha ).
+\alpha \circn \beta = \alpha \circ \beta  \circ^{n-1} \alpha .
+\]
+For example,
+$\alpha \circone \beta = \alpha$; 
+$\alpha \circtwo \beta = \alpha\circ \beta$; 
+$\alpha \circthree \beta = \alpha\circ \beta \circ \alpha$; etc.
+% \begin{align*}
+% \alpha \circone \beta &= \alpha\\
+% \alpha \circtwo \beta &= \alpha\circ \beta\\
+% \alpha \circthree \beta &= \alpha\circ \beta \circ \alpha\\
+% %\alpha \circfour \beta &= \alpha\circ \beta \circ \alpha\circ \beta\\
+% &\vdots
+% \end{align*}
+
+For $\alpha, \beta \in \Eq X$, it is clear that both
+$\alpha$ and $\beta$ are contained in $\alpha \circ \beta$, which is contained in
+$\alpha \join \beta$.  In general, $\circ$ is not a binary operation on the set
+$\Eq X$, since $\alpha \circ \beta$ is not always an equivalence relation; it may
+be strictly contained in $\alpha \join \beta$. In fact, we have
+\[
+\alpha \join \beta = \bigcup_{k\in \N} \alpha \circ^k \beta.
+\]
+
+Suppose $X$ is a set and $\alpha, \beta \in \Eq X$.  It is easy
+to check that the following facts hold for all positive integers $i$, $j$, and $n$:
+\vskip2mm
+\noindent 
+{\it Fact 1.} If $i < j$, then $\alpha \circi \beta \subseteq \beta \circj \alpha$.
+\vskip2mm
+\noindent 
+{\it Fact 2.} If $\alpha\circn \beta = \beta \circn \alpha$, then 
+$\alpha\circ^{n+1} \beta =
+\alpha\circn \beta = %\beta \circn \alpha  = 
+\beta\circ^{n+1} \alpha$.
+\vskip2mm
+\noindent 
+{\it Fact 3.} If $\alpha\circn \beta = \beta \circn \alpha$, then 
+$\alpha\circn \beta = \alpha \join \beta$.
+\vskip2mm
+\noindent
+
+The relations $\alpha$ and $\beta$ are said to be \emph{permuting}, or
+\emph{permutable}, provided $\alpha \circ \beta = \beta \circ \alpha$; they
+are \emph{$n$-permuting}, or \emph{$n$-permutable}, if
+$\alpha \circ^{n} \beta = \beta \circ^{n} \alpha$.
+% Let $X$ be a set and let $\Eq X$ denote the lattice of equivalence relations on $X$.  
+
+The converse of Fact 3 is not true in general.  
+(For instance, when $n=3$ it is easy to find
+examples where $\alpha \circ \beta \circ \alpha = \alpha
+\join \beta$ and yet $\beta \circ \alpha \circ \beta$ is 
+strictly contained in $\alpha \circ \beta \circ \alpha$.)
+However,
+ for all \emph{even} $n>1$ (and trivially for $n=1$) the converse of Fact 3 holds, and we have the
+following lemma.
+
+\vskip2mm
+\begin{lemma}
+\label{lemma:even-permuting-relations}
+ If $n$ is a positive even integer, then the following are equivalent:
+ \begin{enumerate}[(i)]
+ \item $\alpha \circn \beta = \alpha \join \beta$
+ \item $\alpha \circn \beta = \beta \circn \alpha$
+ \item $\alpha \circn \beta \subseteq \beta \circn \alpha$
+ \end{enumerate}
+% \[ \alpha\circn \beta = \alpha \join \beta \iff \alpha\circn \beta = \beta \circn \alpha. \]
+\end{lemma}
+\begin{proof}
+  (i) $\Rightarrow$ (ii):  If (i) holds, then $\beta \circn \alpha \subseteq
+  \alpha \circn \beta$.  Suppose $(x,y) \in \alpha \circn \beta$.
+  (We show $(x,y) \in \beta \circn \alpha$.)  Then, there
+  is a sequence $c_1, \dots, c_{n-1}$ such that 
+  $x \rel{\alpha} c_1 \rel{\beta} c_2 \rel{\alpha} c_3  \rel{\cdots} %c_{n-2} \rel{\alpha} 
+  c_{n-1} \rel{\beta} y$.  
+  Using the reversed sequence, $c_{n-1}, \dots, c_1$, we have $(y,x) \in \bca
+  \subseteq \alpha \join \beta$.  (Note: this depends on the 
+  assumption that $n$ is even.)   Thus $(y,x) \in \alpha \join \beta = \acb$, so
+  there is a sequence $d_1, \dots, d_{n-1}$ such that 
+  $y \rel{\alpha} d_1 \rel{\beta} d_2 \rel{\alpha} d_3  \cdots %d_{n-2} %\rel{\alpha} 
+  d_{n-1} \rel{\beta} x$.
+  Again, because $n$ is even, we can use the reversed sequence to arrive
+  at $(x,y) \in \bca$, as desired.
+\vskip2mm
+\noindent
+  (ii) $\Rightarrow$ (iii):  obvious.
+\vskip2mm
+\noindent
+  (iii) $\Rightarrow$ (i):  If (iii) holds, then it is not hard to check that
+  $\bca$ is an equivalence relation.  Therefore, $\bca = \alpha \join \beta$.
+  Now, by symmetry, the argument used above to prove (i) $\Rightarrow$ (ii) can
+  be applied to show that (ii) holds, so we have $\acb = \bca = \alpha \join \beta$.
+
+\end{proof}
+
+
+
+
+
+
+%% Given $\alpha,
+%% \beta \in \Eq X$, we define the
+%% \emph{interval sublattice of equivalence relations above $\alpha$ and below
+%%   $\beta$}, denoted $\lb \alpha, \beta \rb$, as follows:
+%% \[
+%% \lb \alpha, \beta\rb:= \{\gamma \in \Eq X \mid \alpha \leq \gamma \leq \beta\}.
+%% \]
+%% Let $L$ be a sublattice of $\Eq X$.  Given $\alpha,
+%% \beta \in L$, let $\lb \alpha, \beta \rb_L:= \lb \alpha, \beta \rb \cap L$,
+%% which we call an \emph{interval sublattice of $L$}, or more simply, an \emph{interval of $L$}.
+%% Given 
+%% $\alpha, \beta, \theta \in L$, let  $\lb \alpha, \beta \rb_L^\theta$ denote the
+%% set of equivalence relations in the interval $\lb \alpha, \beta \rb_L$  that permute with
+%% $\theta$.  That is, 
+%% \[
+%% \lb \alpha, \beta \rb_L^\theta:= \{\gamma \in L \mid \alpha \leq \gamma \leq
+%% \beta \text{ and } \gamma \circ \theta = \theta \circ \gamma\}.
+%% \]
+
+
+\section{Permuting Subgroups}
+Let $G$ be a group, and let $H, K \leq G$; i.e., $H$ and $K$ are subgroups of
+$G$.  Define the \emph{composition} of $H$ and $K$ to be the set\footnote{The
+  notation $H\circ K$ is non-standard.  This set is usually called $HK$, but the
+  $\circ$ notation works well in the context of these notes.}
+\begin{equation}
+  \label{eq:1}
+H\circ K = \{hk \mid h\in H, \, k\in K\},  
+\end{equation}
+where juxtaposition, $hk$, denotes group multiplication.
+Let $H\circ^1 K = H$ and, for each $n\in \N$, define
+\begin{equation}
+  \label{eq:2}
+H\circn K = H\circ K \circ^{n-1} H.  
+\end{equation}
+Note that the sets defined in~(\ref{eq:1}) and~(\ref{eq:2}) are not necessarily
+groups, but it is easy to very that $H\circ K$ is a group if and only if $H
+\circ K = K\circ H$. 
+% , in which case we say that $H$ and $K$
+% are \emph{permuting subgroups}, or $H$ and $K$ \emph{permute}.
+
+The subgroups $H$ and $K$ are said to \emph{permute} (to be \emph{permuting}, or
+to be \emph{permutable}) provided $H \circ K= K \circ H$; they
+are \emph{$n$-permuting}, or \emph{$n$-permutable}, provided 
+$H \circ^{n} K = K \circ^{n} H$.
+
+Recall that if $G$ is a group and if $H$ is a (possibly trivial) subgroup of $G$, then
+the transitive G-set
+$\bA = \<G/H, \bar{G}\>$ is the algebra with universe $G/H = $ the left cosets
+of $H$ in $G$, and basic operations $\bar{G} = \{g^{\bA} : g\in G\}$, where for
+each $xH \in G/H$, we have
+\[
+g^{\bA}(xH) = (gx)H.
+\]
+In other words, each $g \in G$ acts on the set of left cosets of $H$ by left
+multiplication.
+A standard result about the algebra $\bA$ is that its congruence lattice, $\Con
+\bA$, is isomorphic to an interval in the subgroup lattice of $G$ 
+(see~\cite[Lemma 4.12]{alvi:1987}).  More precisely,
+\[
+\Con \bA \cong \lb H, G\rb :=\{K \mid H \leq K \leq G\}.
+\]
+The isomorphism $\lb H, G\rb \ni K \mapsto \theta_K \in \Con \bA$ is given by 
+\[
+\theta_K = \{(xH, yH)\in G/H \times G/H \mid y^{-1}x \in K \}
+\]
+and the inverse isomorphism $\Con \bA \ni \theta \mapsto K_\theta \in \lb H,
+G\rb$ is given by 
+\[
+K_\theta = \{ g\in G \mid (H, gH) \in \theta \}.
+\]
+It follows that every lattice property that is true of all congruence lattices
+must also be true of all (intervals of) subgroup lattices.  
+Moreover, the following is easy to prove:
+\begin{lemma}
+\label{lemma:permuting-correspondence}
+  In $\Con \<G/H, \bar{G}\>$, two congruences $\theta_{K_1}$ and $\theta_{K_2}$
+  permute if and only if the corresponding subgroups $K_1$ and $K_2$ permute.
+\end{lemma}
+Lemma~\ref{lemma:permuting-correspondence} is well known (e.g., it is stated
+without proof in~\cite[Lemma 1]{PalfySaxl}), and the following extension is not
+much harder to prove: 
+\begin{lemma}
+\label{lemma:general-permuting-correspondence}
+  In $\Con \<G/H, \bar{G}\>$, two congruences $\theta_{K_1}$ and $\theta_{K_2}$
+  $n$-permute if and only if the corresponding subgroups $K_1$ and $K_2$ $n$-permute.
+\end{lemma}
+\begin{proof}
+  (coming soon)
+\end{proof}
+By the correspondence between subgroups and congruences of G-sets described above, and by
+Lemma~\ref{lemma:general-permuting-correspondence}, Facts 1--3 above imply
+that for all subgroups $H, K$ of a group $G$, and for all positive integers $i$,
+$j$, and $n$, we have
+\vskip2mm
+\noindent 
+{\it Fact 1'.} If $i < j$, then $H \circi K \subseteq K \circj H$.
+\vskip2mm
+\noindent 
+{\it Fact 2'.} If $H \circn K = K \circn H$, then 
+$H \circ^{n+1} K =
+H \circn K = %K \circn H  = 
+K \circ^{n+1} H$.
+\vskip2mm
+\noindent 
+{\it Fact 3'.} If $H\circn K = K \circn H$, then 
+$H\circn K = H \join K$.
+\vskip2mm
+\noindent
+Moreover, we have the following subgroup version of Lemma 1:
+%% \begin{lemma}
+%% \label{lemma:even-permuting-relations}
+\vskip2mm
+\noindent
+{\bf Lemma 1'.} If $n$ is a positive even integer, then the following are equivalent:
+ \begin{enumerate}[(i)]
+ \item $H \circn K = H \join K$
+ \item $H \circn K = K \circn H$
+ \item $H \circn K \subseteq K \circn H$
+ \end{enumerate}
+% \[ \alpha\circn \beta = \alpha \join \beta \iff \alpha\circn \beta = \beta \circn \alpha. \]
+%\end{lemma}
+
+
+% \bibliographystyle{spmpsci}
+\bibliographystyle{plain}
+\bibliography{wjd}
+\end{document}

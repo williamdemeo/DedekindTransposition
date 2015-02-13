@@ -1,0 +1,339 @@
+\documentclass[11pt,reqno]{amsart}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym,amscd}
+\usepackage{amsmath,amssymb,amsthm,url,mathrsfs}
+\usepackage{enumerate,stmaryrd,scalefnt}
+% \usepackage{tikz}
+\usepackage{color}
+% \usetikzlibrary{calc}
+
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\newcounter{claim}
+\newtheorem{claim}[claim]{Claim}
+\newcounter{conjecture}
+\newtheorem{conjecture}[conjecture]{Conjecture}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Prop}{Proposition}
+
+ \theoremstyle{remark}
+ \newtheorem*{remark}{Remark}
+ \newtheorem*{remarks}{Remarks}
+ \newtheorem*{notation}{Notation}
+
+% \numberwithin{theorem}{section}
+% \numberwithin{claim}{section}
+% \numberwithin{equation}{section}
+% \numberwithin{conjecture}{section}
+
+\DeclareMathOperator{\dom}{dom}
+
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+
+\newcommand{\lb}{\ensuremath{\llbracket}}
+\newcommand{\rb}{\ensuremath{\rrbracket}}
+
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\bA}{\ensuremath{\mathbf{A}}}
+\newcommand{\rel}[1]{\ensuremath{\mathbin{#1}}}
+\newcommand{\res}{\ensuremath{\upharpoonright}}  % restriction
+
+% binary operations
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\nleq}{\ensuremath{\nleqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+%\renewcommand{\lneq}{\ensuremath{\lneqslant}}
+\renewcommand{\gneq}{\ensuremath{\gneqslant}}
+\renewcommand{\ngeq}{\ensuremath{\ngeqslant}}
+\newcommand{\ssubnormal}{\ensuremath{\vartriangleleft}}
+\newcommand{\subnormal}{\ensuremath{\trianglelefteqslant}}
+\newcommand{\supnormal}{\ensuremath{\trianglerighteqslant}}
+\newcommand{\notsubnormal}{\ensuremath{\ntrianglelefteqslant}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\join}{\ensuremath{\vee}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\renewcommand{\Join}{\ensuremath{\bigvee}}
+
+\newcommand{\Eq}{\ensuremath{\operatorname{Eq}}}
+\newcommand{\bEq}{\ensuremath{\mathbf{Eq}}}
+\newcommand{\Cg}{\ensuremath{\operatorname{Cg}}}
+\newcommand{\Sg}{\ensuremath{\operatorname{Sg}}}
+\newcommand{\SD}{\ensuremath{\operatorname{SD}}}
+\newcommand{\Con}{\ensuremath{\operatorname{Con}}}
+\newcommand{\Sub}{\ensuremath{\operatorname{Sub}}}
+\newcommand{\Pol}{\ensuremath{\operatorname{Pol}}}
+\newcommand{\Clo}{\ensuremath{\operatorname{Clo}}}
+\newcommand{\Sym}{\ensuremath{\operatorname{Sym}}}
+\newcommand{\core}{\ensuremath{\operatorname{core}}}
+
+\newcommand{\two}{\ensuremath{\mathbf{2}}}
+\newcommand{\three}{\ensuremath{\mathbf{3}}}
+
+% \pagestyle{fancy}
+% \lhead{{\it A lemma relating intervals in partition lattices}}  \chead{}
+%   \rhead{November 12, 2012}
+
+\begin{document}
+\title{Dedekind's Transposition Principal for Lattices of Equivalence Relations}
+\date{November 15, 2012}
+%% First author (Note: The order of the items here is important!)
+\author{William DeMeo}
+\email{williamdemeo@gmail.com}
+\urladdr{http://www.math.sc.edu/~demeow}
+\address{Department of Mathematics\\
+University of South Carolina\\Columbia 29208\\USA}
+%% AMS subject classification; see http://www.ams.org/msc
+%% Only one Primary. Possibly several Secondary.
+%\subjclass[2010]{Primary: 08A30; Secondary: 08A60, 06B10.} %, 06B15.}
+
+%\thanks{}
+
+%% Keywords and phrases
+%\keywords{congruence lattice, finite algebra, finite lattice
+%  representations}
+
+\begin{abstract}
+We prove a version of Dedekind's Transposition
+Principal that holds in  lattices of equivalence relations.
+\end{abstract}
+
+\maketitle
+
+In this note we prove a version of Dedekind's Transposition
+Principal\footnote{If $L$ is a modular lattice, then for any two elements $a, b\in L$
+the intervals $\lb b, a\join b\rb$ and $\lb a\meet b, a\rb$ are isomorphic.
+ See \cite{Dedekind:1900}, or~\cite[page 57]{alvi:1987}.} that
+holds in all (not necessarily modular) lattices of equivalence 
+relations.
+Let $X$ be a set and let $\Eq X$ denote the lattice of equivalence relations on $X$.  Given $\alpha,
+\beta \in \Eq X$ and $n \in \N$, let 
+$\alpha \circ^{n} \beta$ denote the relation $\alpha \circ \beta
+\circ \alpha \circ \cdots \circ \beta \circ \alpha$ in which the symbol $\circ$ appears $n-1$ times.  
+The relations $\alpha$ and $\beta$ \emph{$n$-permute} provided 
+$\alpha \circ^{n} \beta = \beta \circ^{n} \alpha$.
+We define the
+\emph{interval sublattice of equivalence relations above $\alpha$ and below
+  $\beta$} %, denoted $\lb \alpha, \beta \rb$, 
+as follows:
+\[
+\lb \alpha, \beta\rb:= \{\gamma \in \Eq X \mid \alpha \leq \gamma \leq \beta\}.
+\]
+Let $L$ be a sublattice of $\Eq X$.  Given $\alpha,
+\beta \in L$, let $\lb \alpha, \beta \rb_L:= \lb \alpha, \beta \rb \cap L$,
+which we call an \emph{interval sublattice of $L$}, or more simply, an \emph{interval of $L$}.
+Given 
+$\alpha, \beta, \theta \in L$, let  $\lb \alpha, \beta \rb_L^{\theta(n)}$ denote the
+set of equivalence relations in the interval $\lb \alpha, \beta \rb_L$  that $n$-permute with
+$\theta$.  That is, 
+\[
+\lb \alpha, \beta \rb_L^{\theta(n)}:= \{\gamma \in L \mid \alpha \leq \gamma \leq
+\beta \text{ and } \gamma \circ^{n} \theta = \theta \circ^{n} \gamma\}.
+\]
+\begin{lemma}
+\label{lem:1}
+%If $\eta$ and $\theta$ are $n$-permuting relations in $L\leq \Eq X$, then
+If $\eta, \theta \in L\leq \Eq X$ and  $\gamma \circ^{n} \theta = \theta
+\circ^{n} \gamma$ for some  $n\in \N$, then
+% \begin{equation}
+%   \label{eq:0}
+\[\lb\theta, \eta \join \theta\rb_L \cong \lb\eta \meet \theta, \eta\rb_L^{\theta(n)} \leq 
+\lb\eta \meet \theta, \eta\rb_L.
+\]
+\end{lemma}
+%\begin{remarks}
+The lemma states that if $\eta$ and $\theta$ $n$-permute, then
+the sublattice $\lb\theta, \eta \join \theta\rb_L$ is isomorphic to the lattice,
+$\lb\eta \meet \theta, \eta\rb_L^{\theta(n)}$ of relations in $L$ that are below
+$\eta$, above $\eta \meet \theta$, and $n$-permute with $\theta$; moreover, $\lb\eta \meet \theta,
+\eta\rb_L^{\theta(n)}$ is a sublattice of $\lb\eta \meet \theta, \eta\rb_L$.
+
+To prove this, we need the following generalized version of \emph{Dedekind's 
+Rule}:\footnote{In the group theory setting, the well known Dedekind's
+  Rule states that if $A, B, C$ are subgroups of a group,
+  and $A\leq B$, then we have the following identity of sets: $A(B\cap C) = B
+  \cap AC$.}
+\begin{lemma}
+\label{lem:dedekind}
+If $\alpha, \beta, \gamma \in L \leq \Eq X$, and if $\alpha
+\leq \beta$, then we have the following identities of subsets of $X^2$:
+\begin{equation}
+   \label{eq:1}
+   \alpha \circ^{n} (\beta \cap \gamma)= \beta \cap (\alpha \circ^{n} \gamma),
+ \end{equation}
+\begin{equation}
+   \label{eq:2}
+   (\beta \cap \gamma) \circ^{n} \alpha = \beta \cap (\gamma\circ^{n} \alpha).
+ \end{equation}
+%%   \label{eq:1}
+%%   \alpha \circ (\beta \cap \gamma) = \beta \cap (\alpha \circ \gamma),
+%% \end{equation}
+%% \begin{equation}
+%%   \label{eq:2}
+%%   (\beta \cap \gamma) \circ \alpha = \beta \cap (\gamma \circ \alpha).
+%% \end{equation}
+%% \begin{equation}
+%%   \label{eq:3}
+%%   \alpha \circ (\beta \cap \gamma) \circ \alpha = \beta \cap (\alpha \circ \gamma \circ \alpha).
+%% \end{equation}
+%% \begin{equation}
+%%   \label{eq:4}
+%%   \alpha \circ^{n} (\beta \cap \gamma)= \beta \cap (\alpha \circ^{n} \gamma).
+%% \end{equation}
+\end{lemma}
+\begin{proof}
+It is obvious that 
+$\alpha \circ^{n} (\beta \cap \gamma) \subseteq \beta \cap (\alpha \circ^n \gamma)$ 
+and $ (\beta \cap \gamma) \circ^{n} \alpha \subseteq \beta \cap (\gamma \circ^n \alpha)$. 
+We will prove~(\ref{eq:1}) and~(\ref{eq:2}) by establishing the reverse
+inclusions simultaneously by induction.
+%% Indeed, since $\alpha\leq \beta$, we have
+%% \[
+%% \alpha \circ (\beta \cap \gamma) \subseteq \alpha \join (\beta \cap \gamma) \leq
+%% \beta \join (\beta \cap \gamma) = \beta.
+%% \]
+In case $n=1$, the reverse inclusions are easy to prove.  For example,
+if $(x,y) \in \beta \cap (\alpha\circ \gamma)$, then
+since $(x,y) \in \alpha\circ \gamma$, there exists $c\in X$ such that $x\rel{\alpha} c
+\rel{\gamma} y$.  To produce $d\in X$ such that 
+$x \rel{\alpha} d \rel{(\beta\cap \gamma)} y$, simply note
+that $d = c$ works, since %$(c, y) \in  \gamma$ and 
+$(x,c) \in \alpha \leq \beta$ implies $c \rel{\beta} x \rel{\beta} y$, so $(c,y) \in
+\beta\cap \gamma$. 
+
+For the inductive step, we assume the following identities hold:
+\begin{equation}
+   \label{eq:3}
+   \alpha \circ^{n-2} (\beta \cap \gamma)= \beta \cap (\alpha \circ^{n-2} \gamma),
+ \end{equation}
+\begin{equation}
+   \label{eq:4}
+   (\beta \cap \gamma) \circ^{n-2} \alpha = \beta \cap (\gamma\circ^{n-2} \alpha).
+ \end{equation}
+Fix $(x,y) \in \beta \cap (\alpha\circ^n \gamma)$.
+Since $(x,y) \in \alpha\circ^n \gamma$, there exist $c_1, \dots, c_{n-1}\in X$
+such that 
+$x\rel{\alpha} c_1 \rel{\gamma} c_2 \rel{\alpha} \cdots \rel{\gamma}c_{n-1}
+\rel{\alpha} y$.  We must produce $d_1, \dots, d_{n-1}\in X$ such that 
+$x \rel{\alpha} d_1 \rel{(\beta\cap \gamma)} d_2 \rel{\alpha} \cdots
+\rel{(\beta\cap \gamma)} d_{n-1} 
+\rel{\alpha} y$.
+In fact, we will see that $d_i = c_i$ works.  Note that $c_1 \rel{\alpha} x
+\rel{\beta} y \rel{\alpha} c_{n-1}$.  Thus, $(c_1, c_{n-1}) \in \alpha \circ
+\beta \circ \alpha = \beta$, since $\alpha \leq \beta$.  Therefore,  
+$(c_1, c_{n-1}) \in \beta \cap (\gamma \circ^{n-2} \alpha)$, and by the inductive
+hypothesis we have
+$(c_1, c_{n-1}) \in 
+  (\beta \cap \gamma) \circ^{n-2} \alpha$.
+\vskip2mm
+THIS LEMMA MIGHT ACTUALLY BE FALSE.  THE PROOF STILL NEEDS TO BE COMPLETED AND CHECKED.  
+%% , since %$(c, y) \in  \gamma$ and 
+%% $(x,c) \in \alpha \leq \beta$ implies $c \rel{\beta} x \rel{\beta} y$, so $(c,y) \in
+%% \beta\cap \gamma$. 
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:1}]
+Let $\eta, \theta \in L\leq \Eq X$ be permuting equivalence relations in $L$, 
+so $\eta \circ \theta = \theta \circ \eta = \eta \join \theta$.
+Consider the mapping
+$\phi : \lb\theta, \eta \join \theta\rb_L \rightarrow \lb\eta \meet \theta,\eta\rb$ 
+given by 
+$\alpha \mapsto \alpha \meet \eta$.  Clearly $\phi$ maps $\lb\theta, \eta \join \theta\rb_L$ into the sublattice
+$\lb\eta \meet \theta,\eta\rb_L \leq \lb\eta \meet \theta,\eta\rb$.  Moreover,
+it's easy to see that the range of $\phi$
+consists of elements of $L$ that permute with $\theta$, so that 
+$\phi$ maps 
+into $\lb\eta \meet \theta, \eta\rb_L^\theta$.
+Indeed, if $\alpha \in \lb \theta, \eta 
+\join \theta\rb_L$, then by 
+Lemma~\ref{lem:dedekind} we have
+$(\alpha \meet \eta) \circ \theta = \alpha \cap (\eta\circ \theta) = \alpha \cap
+(\theta \circ \eta) = \theta \circ (\alpha \meet \eta)$.
+%Thus, each $\phi(\alpha)$ permutes with $\theta$.
+
+Next, consider the mapping $\psi : \lb \eta\meet \theta, \eta \rb_L^\theta
+\rightarrow \lb\theta, \eta\join \theta\rb$ given by $\psi(\alpha) = \alpha
+\circ \theta$.  Note that $\psi(\alpha) = \alpha \circ \theta = \alpha \join
+\theta$, an element of $L$, since the domain of $\psi$ is a set of
+relations in $L$ that permute with $\theta$.
+We show that the two maps
+\begin{equation}
+  \label{eq:phi}
+\phi : \lb\theta, \eta \join \theta\rb_L \ni \alpha \longmapsto 
+\alpha \meet \eta  \in \lb\eta \meet \theta, \eta\rb_L^\theta
+\end{equation}
+\begin{equation}
+  \label{eq:psi}
+\psi :  \lb\eta \meet \theta, \eta\rb^\theta_L \ni \alpha \longmapsto \alpha \circ \theta \in
+\lb\theta, \eta \join \theta\rb_L.
+\end{equation}
+are inverse lattice isomorphisms.  It is clear that these maps are order preserving.
+Also, for $\alpha \in \lb\theta, \eta \join \theta\rb_L$ we have, by Lemma~\ref{lem:dedekind},
+$\psi\, \phi(\alpha) = (\alpha \meet \eta)\circ \theta = 
+\alpha \cap (\eta\circ \theta) = 
+\alpha \cap (\eta\join \theta) = \alpha$. For
+$\alpha \in \lb\eta \meet \theta, \eta\rb_L^\theta$, we have, by Lemma~\ref{lem:dedekind},
+$\phi\, \psi(\alpha) = \phi(\alpha\circ \theta) =  (\alpha
+\circ \theta) \meet \eta = \alpha \circ (\theta \meet \eta)$.
+
+To complete the proof of Lemma~\ref{lem:1}, we show that
+$\lb\eta \meet \theta, \eta\rb_L^\theta$ is a sublattice of $\lb\eta \meet \theta,
+\eta\rb_L$.
+Fix $\alpha, \beta \in \lb\eta \meet \theta, \eta\rb_L^\theta$.  We show
+\begin{equation}
+  \label{eq:i}
+  (\alpha \join \beta) \circ \theta \subseteq \theta\circ (\alpha \join \beta),
+\end{equation}
+and
+\begin{equation}
+  \label{eq:ii}
+  (\alpha \meet \beta) \circ \theta \subseteq \theta\circ (\alpha \meet \beta).
+\end{equation}
+The reverse inclusions follow by symmetric arguments.
+
+Fix $(x,y) \in (\alpha \join \beta) \circ \theta$.  Then there exist $c \in X$
+and $n< \omega$ such that $x \rel{(\alpha \circ^{n}\beta)} c \rel{\theta} y$.
+Thus, $(x,y) \in \alpha \circ^{n}\beta \circ \theta$.  Since $\theta$ permutes
+with both $\alpha$ and $\beta$, we have $(x,y) \in \theta \circ \alpha
+\circ^{n}\beta \subseteq \theta \circ (\alpha \join \beta)$, which proves
+(\ref{eq:i}).
+Fix $(x,y) \in (\alpha \meet \beta) \circ \theta$.  Then 
+$(x,y) \in (\alpha \circ \theta) \cap (\beta \circ \theta) = 
+(\theta \circ \alpha ) \cap (\theta \circ \beta)$.  Therefore, there exist $d_1,
+\,d_2$ such that 
+$x \rel{\theta} d_1 \rel{\alpha} y$ and 
+$x \rel{\theta} d_2 \rel{\beta} y$.  Note that $(d_1, y) \in \alpha \leq \eta$ and 
+$(d_2, y) \in \beta \leq \eta$, so $(d_1, d_2) \in \eta$.  Also, $d_1
+\rel{\theta} x \rel{\theta} d_2$, so $(d_1, d_2) \in \theta$.  Therefore, 
+$(d_1, d_2) \in \eta \meet \theta \leq \alpha \meet \beta$.
+In particular, 
+%$(d_1, d_2) \in \beta$, so $(d_1,y)\in \beta$, so 
+$d_1 \rel{\beta} d_2 \rel{\beta} y$, so
+$(d_1,y)\in \alpha \meet \beta$.
+% \rel{(\alpha \meet \beta)} d_2 \rel{\beta} y$.  It follows that 
+% \rel{(\alpha \meet \beta)} d_2 \rel{\beta} y$.  It follows that 
+% and we have $d_1 \rel{(\alpha \meet \beta)} d_2 \rel{\beta} y$.  It follows that 
+% %$(d_1, y) \in\alpha\meet \beta$, so 
+% 
+Thus, $x\rel{\theta} d_1 \rel{(\alpha\meet \beta)} y$, which proves~(\ref{eq:ii}).
+
+\end{proof}
+
+
+\bibliographystyle{spmpsci}
+%\bibliographystyle{plain}
+\bibliography{wjd}
+\end{document}
