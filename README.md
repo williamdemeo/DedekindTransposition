@@ -1,3 +1,6 @@
+
+## Notes on a general Dedekind transposition principle
+
 If L is a modular lattice, then for any two elements a and b in L,
 the intervals [b, a V b] and [a ^ b, a] are isomorphic.
 
